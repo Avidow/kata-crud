@@ -15,30 +15,30 @@ public class UserController {
 
     @GetMapping(value = "/users")
     public String show(ModelMap model) {
-        model.addAttribute("users", dao.list());
+        model.addAttribute("users", dao.getAllEntities());
         model.addAttribute("user", new User());
         return "index";
     }
 
     @PostMapping(value = "/users", params = "action=add")
-    public String add(ModelMap model, @ModelAttribute User user) {
+    public String addUser(ModelMap model, @ModelAttribute User user) {
         user.setId(null);
-        dao.add(user);
+        dao.addEntity(user);
         return show(model);
     }
 
-    @PostMapping(value = "/users", params = "action=update")
-    public String update(ModelMap model, @ModelAttribute User user) {
+    @PutMapping(value = "/users", params = "action=update")
+    public String updateUser(ModelMap model, @ModelAttribute User user) {
         if (user.getId() != null) {
-            dao.update(user);
+            dao.updateEntity(user);
         }
         return show(model);
     }
 
-    @PostMapping(value = "/users", params = "action=remove")
-    public String remove(ModelMap model, @ModelAttribute User user) {
+    @DeleteMapping(value = "/users", params = "action=remove")
+    public String removeUser(ModelMap model, @ModelAttribute User user) {
         if (user.getId() != null) {
-            dao.remove(user.getId());
+            dao.removeEntityById(user.getId());
         }
         return show(model);
     }

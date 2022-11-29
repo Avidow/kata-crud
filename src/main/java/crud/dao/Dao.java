@@ -4,12 +4,12 @@ import java.util.List;
 
 public interface Dao<T> {
 
-    void add(T t);
+    void addEntity(T t);
 
-    List<T> list();
+    List<T> getAllEntities();
 
-    void update(T t);
+    void updateEntity(T t);
 
-    void remove(long id);
+    void removeEntityById(long id);
 
 }

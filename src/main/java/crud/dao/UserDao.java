@@ -16,18 +16,18 @@ public class UserDao implements Dao<User> {
 
     @Override
     @Transactional
-    public void add(User user) {
+    public void addEntity(User user) {
         entityManager.persist(user);
     }
 
     @Override
-    public List<User> list() {
+    public List<User> getAllEntities() {
         return entityManager.createNamedQuery("User.list", User.class).getResultList();
     }
 
     @Override
     @Transactional
-    public void update(User user) {
+    public void updateEntity(User user) {
         User entity = entityManager.find(User.class, user.getId());
         if (entity != null) {
             entityManager.merge(user);
@@ -36,7 +36,7 @@ public class UserDao implements Dao<User> {
 
     @Override
     @Transactional
-    public void remove(long id) {
+    public void removeEntityById(long id) {
         User entity = entityManager.find(User.class, id);
         if (entity != null) {
             entityManager.remove(entityManager.find(User.class, id));
